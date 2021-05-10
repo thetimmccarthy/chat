@@ -4,11 +4,7 @@ const { body, validationResult } = require('express-validator');
 require('dotenv').config();
 
 const pool = new Pool({
-    user: process.env.USER,
-    host: process.env.HOST,
-    database: process.env.DATABASE,
-    password: process.env.PASSWORD,
-    port: process.env.DBPORT
+    connectionString: process.env.DATABASE_URL
   })
 
 const getUsers = async (req, res) => {

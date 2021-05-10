@@ -1,0 +1,72 @@
+        {{#if main}}
+        <div class="userform">
+        <h2><a href='/login'> Login </a></h2><br>
+
+        <h2><a href='/register'> Register </a></h2>
+        </div>
+        {{else if login }}
+        
+        <form method="POST" action="/login">
+           
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+            <div class="form-floating">
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+            </div>
+            {{#if error}}
+                {{#each error}}
+                    
+                    <div class="alert alert-danger" role="alert">
+                        {{this.msg}}
+                    </div>
+                {{/each}}
+            {{/if}}
+            
+            
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            
+        </form>
+        
+        
+        {{else if register}} 
+               
+         <form method="POST" action="/register">
+           
+            <h1 class="h3 mb-3 fw-normal">Please Register</h1>
+
+            <div class="form-floating">
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+            </div>
+
+            <div id="passwordHelpBlock" class="form-text">
+                Your password must be at least 8 characters, and must contain one uppercase letter and one number.
+            </div>
+            <br>
+            
+            {{#if error}}
+                {{#each error}}
+                    
+                    <div class="alert alert-danger" role="alert">
+                        {{this.msg}}
+                    </div>
+                {{/each}}
+            {{/if}}
+
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+            
+        </form>
+        
+        
+        {{/if}}

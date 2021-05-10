@@ -1,0 +1,129 @@
+* {
+    font-family: 'Avenir';
+  }
+
+  .enter-chat {
+    width: 500px; 
+    height: 60px;
+  }
+  .nav-container-bottom-padding {
+    padding-top: 75px;
+  }
+
+  .nav-container-top-padding {
+    padding-bottom: 75px;
+  }
+
+  .chat-form {
+    position: fixed;
+  }
+  .bubbleWrapper {
+      padding: 10px 10px;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+      align-self: flex-end;
+    color: #fff;
+  }
+  .inlineContainer {
+    display: inline-flex;
+  }
+  .inlineContainer.own {
+    flex-direction: row-reverse;
+  }
+  .inlineIcon {
+    width:20px;
+    object-fit: contain;
+  }
+  .ownBubble {
+      min-width: 60px;
+      max-width: 700px;
+      padding: 14px 18px;
+    margin: 6px 8px;
+      background-color: #5b5377;
+      border-radius: 16px 16px 0 16px;
+      border: 1px solid #443f56;
+   
+  }
+  .otherBubble {
+      min-width: 60px;
+      max-width: 700px;
+      padding: 14px 18px;
+      margin: 6px 8px;
+      background-color: #6C8EA4;
+      border-radius: 16px 16px 16px 0;
+      border: 1px solid #54788e;
+    
+  }
+  .own {
+      align-self: flex-end;
+  }
+  .other {
+      align-self: flex-start;
+  }
+  span.own,
+  span.other{
+    font-size: 14px;
+    color: grey;
+  }
+
+  body  
+{  
+    margin: 0;  
+    padding: 0;  
+    /* background-color:#6abadeba;   */
+    font-family: 'Arial';  
+}  
+.userform{  
+        width: 382px;  
+        overflow: hidden;  
+        margin: auto;  
+        margin: 20 0 0 450px;  
+        padding: 80px;  
+        background: #23463f;  
+        border-radius: 15px ;  
+          
+}  
+h2{  
+    text-align: center;  
+    color: #277582;  
+    padding: 20px;  
+}  
+label{  
+    color: #08ffd1;  
+    font-size: 17px;  
+}  
+#email{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+}  
+#password{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+      
+}  
+#log{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 17px;  
+    padding-left: 7px;  
+    color: blue;  
+  
+  
+}  
+span{  
+    color: white;  
+    font-size: 17px;  
+}  
+a{  
+    float: center;  
+    /* background-color: grey;   */
+}  
+  

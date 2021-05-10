@@ -1,0 +1,30 @@
+{{#if chats}}
+
+    {{#each chats }}
+        {{#if this.email_match}}
+            
+            <div class="bubbleWrapper" >
+                
+                <div class="inlineContainer own">
+                    <div class="ownBubble own">
+                        {{this.message}}
+                    </div>
+                </div>
+                <span class="own"> {{this.time}} </span>
+            </div>
+        {{else}}
+            <div class="bubbleWrapper" >
+                <span class="other"> {{this.email}} </span>
+                <div class="inlineContainer">
+                    <div class="otherBubble other">
+                        {{this.message}}
+                    </div>
+                </div>
+                <span class="other"> {{this.time}} </span>
+            </div>
+
+
+        {{/if}}
+    {{/each}}
+
+{{/if}}

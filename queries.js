@@ -26,7 +26,6 @@ const getUsers = async (req, res) => {
         if (rows.length > 0) {
             
             let foundPass = rows[0].password;
-
             const passwordMatch = await bcrypt.compare(submittedPass, foundPass);
             
             // if passwords match, redirect to messages
@@ -45,8 +44,7 @@ const getUsers = async (req, res) => {
                     login: true,
                     layout: 'home',
                     error: errors
-                })
-                
+                })                
             }
 
         // if no email registered, redirect to register
@@ -60,20 +58,15 @@ const getUsers = async (req, res) => {
                     error: errors
                 })
         }
-
     // if error, redirect to home
     } catch (error) {
         console.error(error);
         res.redirect('/');
     }
-
-
 }
 
 const registerUser = async (req, res) => {
-    
-    try{
-    
+    try{    
         const email = req.body.email.toLowerCase();
         const password = req.body.password;        
         const hashPassword = await bcrypt.hash(password, 10)
@@ -85,23 +78,19 @@ const registerUser = async (req, res) => {
 
         const { rows } = await pool.query(query)
         
-        if(rows.length === 0) {
-        
+        if(rows.length === 0) {        
             query = {
                 text: 'INSERT INTO users (email, password) VALUES ($1, $2)',
                 values: [email, hashPassword],
             }
-
             req.session.email = email;
             pool.query(query)
                 .then(() => res.redirect('/messages'))
                 .catch(err => console.error(err));
         } else { 
-
             errors = [{
                 msg : "Email in use already, try again!"
             }]
-
             res.render('user', {
                 register: true,
                 layout: 'home',
@@ -112,9 +101,7 @@ const registerUser = async (req, res) => {
         console.error(error);
         res.redirect('/');
     }
-
 }
-
 
 const getMessages = async (req, res) => {
 
@@ -125,12 +112,9 @@ const getMessages = async (req, res) => {
     
     const { rows } = await pool.query(query);
     
-    
-
     if (rows.length > 0) {
         rows.forEach(result => {
-            result['email_match'] = result['email'] === req.session.email;
-            
+            result['email_match'] = result['email'] === req.session.email;       
         })
         res.render('chats', {
             chats: rows
@@ -138,7 +122,6 @@ const getMessages = async (req, res) => {
     } else {
         res.render('chats');
     }
-
 }
 
 const addMessage = async (email, message) => {

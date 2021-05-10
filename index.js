@@ -30,15 +30,6 @@ app.engine('hbs', exphbs({
 
 app.set('view engine', 'hbs');
 
-// PORT = 3000;
-// const {
-//     // PORT = 3000,
-//     SESS_LIFETIME = TWO_HOURS,
-//     NODE_ENV = 'development',
-//     SESS_NAME = 'redisPractice',
-//     SESS_SECRET = 'thisisthesecret'
-// } = process.env
-
 const {
     PORT = process.env.PORT,
     SESS_LIFETIME = process.env.SESS_LIFETIME,
@@ -51,7 +42,6 @@ const {
 
 const IN_PROD = NODE_ENV === 'production';
 
-// TODO: assign variables
 let sess = {
     name: SESS_NAME,
     resave: false,
@@ -62,7 +52,7 @@ let sess = {
         sameSite: true,
         secure: IN_PROD
     }, 
-    // store: new redisStore({host: 'localhost', port: 6379, client: redisClient, ttl: 86400})
+    
 
 }
 
@@ -73,8 +63,7 @@ io.use((socket, next) => {
     thisSession(socket.request, {}, next);
 })
 
-const redirectLogin = (req, res, next) => {
-    // console.log(req.session);
+const redirectLogin = (req, res, next) => {   
     if (!req.session.email) {
         res.redirect('/');
     } else {
@@ -117,21 +106,13 @@ const checkEmailPassword = [
                 })
             }
         } else {
-        // if(!errorValidation.isEmpty) {
-        //     next();
-        // }
             next();
         }
     }
 
 ]
 
-// THIS ONLY WORKS FOR script.js and style.css DO NOT COMMENT
-// MUST USE '/public' BEFORE SERVING STATIC HTML
 app.use(express.static('public'));
-
-// THIS DOES NOT WORK
-// app.use('/static', express.static(path.join(__dirname + "/public")));
 
 // serve base html file
 app.get('/', bypassLogin, (req, res) => {
@@ -142,16 +123,13 @@ app.get('/', bypassLogin, (req, res) => {
     })
 })
 
-
 app.get('/messages', redirectLogin, db.getMessages);
-
 
 app.get('/login', (req, res) => {
     res.render('user', {
         login: true,
         layout: 'home',
-    })
-    
+    })    
 })
 
 app.post('/login', checkEmailPassword, db.getUsers)
@@ -161,9 +139,6 @@ app.get('/register',(req, res) => {
         register: true,
         layout: 'home',
     })
-
-     
-
 });
 
 app.post('/register', checkEmailPassword, db.registerUser);
@@ -177,19 +152,14 @@ io.on('connection', socket => {
     } else {
         connections[email] = [socket.id];
     }
-    
         socket.on('chat', message => {        
-        
-        
-        
         db.addMessage(email, message);      
         let id = socket.id;        
         io.emit('chat', connections[email], message);        
     }) 
 })
 
-app.get('/logout', (req, res) => {
-    
+app.get('/logout', (req, res) => {    
     req.session.destroy( (err) => {
         res.redirect('/');
     })

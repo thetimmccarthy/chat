@@ -10,7 +10,7 @@ const db = require('./queries.js');
 const sharedSession = require('express-socket.io-session');
 const redis = require('redis');
 const { runInNewContext } = require('vm');
-const redisClient = redis.createClient();
+const redisClient = redis.createClient(process.env.REDIS_URL);
 const redisStore = require('connect-redis')(session);
 require('dotenv').config();
 
@@ -67,7 +67,7 @@ const redirectLogin = (req, res, next) => {
     if (!req.session.email) {
         res.redirect('/');
     } else {
-        next();
+        next(); 
     }
 }
 

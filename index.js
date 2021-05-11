@@ -52,7 +52,7 @@ let sess = {
         sameSite: true,
         secure: IN_PROD
     }, 
-    store: new redisStore({ host: process.env.HOST, port: 6379, client: redisClient, ttl: 86400 }),
+    // store: new redisStore({ host: process.env.HOST, port: 6379, client: redisClient, ttl: 86400 }),
 
 }
 

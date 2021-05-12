@@ -32,7 +32,7 @@ const getUsers = async (req, res) => {
             
             // if passwords match, redirect to messages
             if (passwordMatch) {
-                
+                console.log(req.session);
                 req.session.email = email;
                 
                 res.redirect('/messages');
@@ -99,7 +99,7 @@ const registerUser = async (req, res) => {
                 error: errors
             })            
         }
-    } catch (error) {
+    } catch (error) {  
         console.error(error);
         res.redirect('/');
     }

@@ -90,7 +90,7 @@ const checkEmailPassword = [
         const route = req.route.path;
     
         let errors = errorValidation['errors']
-        console.log(errors);
+        
         if (errors.length > 0) {
             if (route === '/login') {
                 res.render('user', {

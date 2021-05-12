@@ -72,7 +72,7 @@ const registerUser = async (req, res) => {
         const email = req.body.email.toLowerCase();
         const password = req.body.password;        
         const hashPassword = await bcrypt.hash(password, 10)
-        
+        console.log('In registerUser');
         query = {
             text: 'select * from users where email = $1',
             values: [req.body.email],

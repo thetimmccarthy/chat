@@ -3,11 +3,14 @@ const bcrypt = require('bcrypt');
 const { body, validationResult } = require('express-validator');
 require('dotenv').config();
 
+const isProduction = process.env.NODE_ENV == 'production'
+const connectionString = `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.DBPORT}/${process.env.DATABASE}`
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-      }
+    connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
+    // ssl: {
+    //     rejectUnauthorized: false
+    //   }
+    ssl: isProduction
   })
 
 const getUsers = async (req, res) => {

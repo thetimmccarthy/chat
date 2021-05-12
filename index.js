@@ -32,7 +32,8 @@ app.set('view engine', 'hbs');
 
 const {
     PORT = process.env.PORT,
-    SESS_LIFETIME = TWO_HOURS,
+    // SESS_LIFETIME = TWO_HOURS,
+    SESS_LIFETIME,
     NODE_ENV = process.env.NODE_ENV,
     SESS_NAME = process.env.SESS_NAME,
     SESS_SECRET = process.env.SESS_SECRET

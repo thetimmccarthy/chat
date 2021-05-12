@@ -64,6 +64,7 @@ io.use((socket, next) => {
 })
 
 const redirectLogin = (req, res, next) => {   
+    console.log(req.session)
     if (!req.session.email) {
         res.redirect('/');
     } else {

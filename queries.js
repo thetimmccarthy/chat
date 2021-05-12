@@ -33,9 +33,9 @@ const getUsers = async (req, res) => {
             
             // if passwords match, redirect to messages
             if (passwordMatch) {
-                console.log(req.session);
+                
                 req.session.email = email;
-                console.log(req.session)
+                
                 res.redirect('/messages');
 
             // if they don't match, redirect to login

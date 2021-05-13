@@ -54,7 +54,8 @@ const IN_PROD = NODE_ENV === 'production';
 
 const connectionString = `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.DBPORT}/${process.env.DATABASE}`
 const pgPool = new Pool({
-    connectionString: IN_PROD ? process.env.DATABASE_URL : connectionString
+    connectionString: IN_PROD ? process.env.DATABASE_URL : connectionString,
+    ssl: IN_PROD ? {rejectUnauthorized: false} : false
 })
 
 let sess = {

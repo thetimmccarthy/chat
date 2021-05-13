@@ -13,20 +13,20 @@ const { runInNewContext } = require('vm');
 require('dotenv').config();
 
 // const redisClient = redis.createClient(process.env.REDIS_URL);
-const RedisStore = require('connect-redis')(session);
+// const RedisStore = require('connect-redis')(session);
 // RedisClient.on('error', err => {
 //     console.log('Redis error: ', err);
 // })
 
 
-// const mongoDBStore = require('connect-mongodb-session')(session);
-// const store = new mongoDBStore({
-//     uri: 'mongodb://localhost:27017/',
-//     collection: 'mySessions'
-// });
-// store.on('error', function(error) {
-//     console.log(error);
-//   });
+const mongoDBStore = require('connect-mongodb-session')(session);
+const store = new mongoDBStore({
+    uri: 'mongodb://localhost:27017/',
+    collection: 'mySessions'
+});
+store.on('error', function(error) {
+    console.log(error);
+  });
 
 const TWO_HOURS = 1000 * 60 * 60 * 2;
 
@@ -64,10 +64,10 @@ let sess = {
         secure: IN_PROD
     }, 
     // store: new redisStore({ host: process.env.HOST, port: 6379, client: redisClient, ttl: 86400 }),
-    // store: store
-    store: process.env.NODE_ENV === 'production' ? new RedisStore({
-        url: process.env.REDIS_URL
-    }) : null,
+    store: store
+    // store: process.env.NODE_ENV === 'production' ? new RedisStore({
+    //     url: process.env.REDIS_URL
+    // }) : null,
 
 }
 

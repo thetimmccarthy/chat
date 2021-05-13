@@ -47,6 +47,7 @@ let sess = {
     resave: false,
     saveUninitialized: false,
     secret: SESS_SECRET,
+    proxy: true,
     cookie: {
         maxAge: SESS_LIFETIME,
         sameSite: true,
@@ -124,9 +125,7 @@ app.get('/', bypassLogin, (req, res) => {
     })
 })
 
-// app.get('/messages', redirectLogin, db.getMessages);
-
-app.get('/messages', db.getMessages);
+app.get('/messages', redirectLogin, db.getMessages);
 
 app.get('/login', (req, res) => {
     res.render('user', {

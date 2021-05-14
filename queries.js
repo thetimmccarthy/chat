@@ -9,10 +9,7 @@ const connectionString = `postgresql://${process.env.USER}:${process.env.PASSWOR
 const pool = new Pool({
     connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
     ssl: isProduction ? {rejectUnauthorized: false} : false
-    // ssl: {
-    //     rejectUnauthorized: false
-    //   }
-    // ssl: isProduction
+    
   })
 
 const getUsers = async (req, res) => {
@@ -74,7 +71,7 @@ const registerUser = async (req, res) => {
         const email = req.body.email.toLowerCase();
         const password = req.body.password;        
         const hashPassword = await bcrypt.hash(password, 10)
-        console.log('In registerUser');
+        
         query = {
             text: 'select * from users where email = $1',
             values: [req.body.email],
@@ -133,7 +130,7 @@ const addMessage = async (email, message) => {
         text: 'INSERT INTO messages (email, message, time) VALUES ($1, $2, NOW());',
         values: [email, message]
     }
-
+    
     pool.query(query)
     .catch(err => console.error(err));
 }

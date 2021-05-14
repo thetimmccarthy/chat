@@ -90,7 +90,7 @@ io.use((socket, next) => {
 })
 
 const redirectLogin = (req, res, next) => {   
-    console.log(req.session)
+    
     if (!req.session.email) {
         res.redirect('/');
     } else {
@@ -173,14 +173,18 @@ app.post('/register', checkEmailPassword, db.registerUser);
 const connections = {}
 
 io.on('connection', socket => {
+    
     let email = socket.request.session.email;
+    
     if(connections[email]) {
         connections[email].push(socket.id);
     } else {
         connections[email] = [socket.id];
     }
-        socket.on('chat', message => {        
-        db.addMessage(email, message);      
+        socket.on('chat', message => {     
+        
+        db.addMessage(email, message);
+              
         let id = socket.id;        
         io.emit('chat', connections[email], message);        
     }) 

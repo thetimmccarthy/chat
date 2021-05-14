@@ -1,18 +1,19 @@
 const socket = io();
 
-const btn = document.querySelector('.chat-form');
+const btn = document.getElementById('chat-form');
 const words = document.querySelector('.enter-chat');
 
 
 btn.addEventListener('submit', e => {
     e.preventDefault();
-    console.log("New Message!")
+    
     
     socket.emit('chat', words.value);
     words.value = '';
 })
 
-const chatRoom = document.querySelector('.chat-room');
+
+const chatRoom = document.getElementById('chat-messages');
 
 const renderMessage = (message, own) => {
     const span_class = own ? 'own' : 'other';
@@ -48,8 +49,9 @@ const renderMessage = (message, own) => {
     div_two.appendChild(div_three);
     div.appendChild(div_two);
     div.appendChild(time_span);
-
+    
     chatRoom.appendChild(div); 
+    div.scrollIntoView();
 }
 
 socket.on('chat', (emails, message) => {       

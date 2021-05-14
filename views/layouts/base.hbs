@@ -30,11 +30,6 @@
     </head>
     <body>
         
-        {{!-- <form class="chat-form" >
-            <label></label>    
-            <input type="text" class="enter-chat">
-            <input type="submit" value="Submit">
-        </form> --}}
         <div class="nav-container-top-padding">
             <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
                 <div class="container-fluid">
@@ -55,9 +50,12 @@
                 </div>
             </nav>
         </div>
-        <div id='chat-room' class="chat-room" onload="onLoad">
+        <div class='chat-room' onload="onLoad">
             {{{body}}}
         </div>
+        
+        <div id='chat-messages' class='chat-room'></div>
+        
         <div class="nav-container-bottom-padding">
             <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
             <div class="container-fluid">
@@ -68,7 +66,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav">
                     
-                    <li class="nav-item">
+                    <li id="chat-form" class="nav-item">
                         <form>
                         <label></label>    
                         <input type="text" class="enter-chat">
@@ -82,11 +80,7 @@
             </div>
             </nav>
         </div>
-        {{!-- <footer>
-        <h6>
-            By: Tim McCarthy
-        </h6>
-        </footer> --}}
+
         <script src="socket.io/socket.io.js"> </script>
         <script src="/script.js"></script>
         

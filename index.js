@@ -54,7 +54,6 @@ let sess = {
         pool: pgPool,
         table: 'session'
     })
-
 }
 
 const thisSession = session(sess);
@@ -90,8 +89,7 @@ const checkEmailPassword = [
     function(req, res, next) {
         var errorValidation = validationResult(req);
         const route = req.route.path;
-    
-        let errors = errorValidation['errors']
+        let errors = errorValidation['errors'];
         
         if (errors.length > 0) {
             if (route === '/login') {

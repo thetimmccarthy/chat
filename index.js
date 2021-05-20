@@ -14,22 +14,6 @@ require('dotenv').config();
 const pgStore = require('connect-pg-simple')(session);
 const { Pool, Client } = require('pg');
 
-// const redisClient = redis.createClient(process.env.REDIS_URL);
-// const RedisStore = require('connect-redis')(session);
-// RedisClient.on('error', err => {
-//     console.log('Redis error: ', err);
-// })
-
-
-// const mongoDBStore = require('connect-mongodb-session')(session);
-// const store = new mongoDBStore({
-//     uri: 'mongodb://localhost:27017/',
-//     collection: 'mySessions'
-// });
-// store.on('error', function(error) {
-//     console.log(error);
-//   });
-
 const TWO_HOURS = 1000 * 60 * 60 * 2;
 
 app.use(express.json());
@@ -73,12 +57,6 @@ let sess = {
         pool: pgPool,
         table: 'session'
     })
-    // store: new (require('connect-pg-simple')(session))()
-    // store: new redisStore({ host: process.env.HOST, port: 6379, client: redisClient, ttl: 86400 }),
-    // store: store
-    // store: process.env.NODE_ENV === 'production' ? new RedisStore({
-    //     url: process.env.REDIS_URL
-    // }) : null,
 
 }
 

@@ -1,5 +1,4 @@
 const socket = io();
-
 const btn = document.getElementById('chat-form');
 const words = document.querySelector('.enter-chat');
 
@@ -23,7 +22,6 @@ const renderMessage = (message, own) => {
     let date = new Date();
     let hours = date.getHours();
     let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
     let day = date.getDate();
     let month = date.getMonth() + 1;
     month = month < 10 ? '0' + month : month

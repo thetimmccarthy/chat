@@ -2,6 +2,8 @@ const { Pool, Client } = require('pg');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
+const moment = require('moment-timezone');
+
 const isProduction = process.env.NODE_ENV == 'production'
 const connectionString = `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.DBPORT}/${process.env.DATABASE}`
 
@@ -106,7 +108,7 @@ const registerUser = async (req, res) => {
 const getMessages = async (req, res) => {
 
     query = {
-        text: 'select id, email, message, to_char(time, $1) as time from messages;',
+        text: 'select id, email, message, to_char(time, $1) as time from messages order by time;',
         values: ["MM/DD/YYYY HH:MI AM"]
     }
     
@@ -114,7 +116,16 @@ const getMessages = async (req, res) => {
     
     if (rows.length > 0) {
         rows.forEach(result => {
+            let d = Date.parse(result['time'])
+            
+            var myTimezone = "America/New_York";
+            var myDatetimeFormat= "MM/DD/YYYY hh:mm A";
+            var myDatetimeString = moment(d).tz(myTimezone).format(myDatetimeFormat);
+
+            result['time'] = myDatetimeString
+
             result['email_match'] = result['email'] === req.session.email;       
+            
         })
         res.render('chats', {
             chats: rows
